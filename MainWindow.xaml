@@ -1,12 +1,36 @@
-﻿<Window x:Class="VectorTileProvider.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VectorTileProvider"
+        xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map" x:Class="VectorTileProvider.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+	<Grid>
+		<dxm:MapControl x:Name="map">
+			<dxm:ImageLayer x:Name="left" ViewportChanged="Layer_ViewportChanged">
+				<dxm:MbTilesDataProvider 
+					FileUri="\\corp\internal\common\4pshenichny\VectorTileRenderer\2017-07-03_great-britain_england.mbtiles"
+					StyleFileUri="\\corp\internal\common\4pshenichny\VectorTileRenderer\styles\osm-bright-style.json"/>
+			</dxm:ImageLayer>
+			<dxm:ImageLayer x:Name="right">
+				<dxm:MbTilesDataProvider 
+					FileUri="\\corp\internal\common\4pshenichny\VectorTileRenderer\2017-07-03_great-britain_england.mbtiles"
+					StyleFileUri="\\corp\internal\common\4pshenichny\VectorTileRenderer\styles\dark-matter-style.json"/>
+			</dxm:ImageLayer>
+		</dxm:MapControl>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid x:Name="leftPanel" Grid.Column="0" SizeChanged="Grid_SizeChanged"/>
+			<GridSplitter HorizontalAlignment="Right" 
+                  VerticalAlignment="Stretch" 
+                  Grid.Column="1" ResizeBehavior="PreviousAndNext"
+                  Width="5" Background="#FFBCBCBC" />
+		</Grid>
+	</Grid>
 </Window>
